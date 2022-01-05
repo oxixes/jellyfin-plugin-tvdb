@@ -29,7 +29,7 @@ namespace Jellyfin.Plugin.Tvdb.Providers
         /// <summary>
         /// The provider name.
         /// </summary>
-        public static readonly string ProviderName = "Missing Episode Fetcher";
+        public static readonly string ProviderName = "Missing Episode Fetcher (Only upcoming)";
 
         private readonly TvdbClientManager _tvdbClientManager;
         private readonly IBaseItemManager _baseItemManager;

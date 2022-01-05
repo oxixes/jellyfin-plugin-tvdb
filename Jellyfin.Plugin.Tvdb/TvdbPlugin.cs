@@ -16,7 +16,7 @@ namespace Jellyfin.Plugin.Tvdb
         /// <summary>
         /// Gets the provider name.
         /// </summary>
-        public const string ProviderName = "TheTVDB";
+        public const string ProviderName = "TheTVDB (Only upcoming)";
 
         /// <summary>
         /// Gets the provider id.
@@ -43,7 +43,7 @@ namespace Jellyfin.Plugin.Tvdb
         public override string Name => "TheTVDB";
 
         /// <inheritdoc />
-        public override Guid Id => new Guid("a677c0da-fac5-4cde-941a-7134223f14c8");
+        public override Guid Id => new Guid("3a1bc6f7-9fc1-4a3d-953d-42a53467677f");
 
         /// <inheritdoc />
         public IEnumerable<PluginPageInfo> GetPages()

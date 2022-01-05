@@ -1,0 +1,21 @@
+[
+    {
+        "guid": "3a1bc6f7-9fc1-4a3d-953d-42a53467677f",
+        "name": "TheTVDB (Only upcoming)",
+        "description": "TheTVDB plugin but only upcoming missing episodes will be added and no virtual seasons will be created.",
+        "overview": "TheTVDB plugin",
+        "owner": "oxixes",
+        "category": "Metadata",
+        "imageUrl": "https://repo.jellyfin.org/releases/plugin/images/jellyfin-plugin-tvdb.png",
+        "versions": [
+            {
+                "version": "1.0.0.0",
+                "changelog": "Initial build",
+                "targetAbi": "10.8.0.0",
+                "sourceUrl": "https://github.com/oxixes/jellyfin-plugin-tvdb/releases/download/1.0.0.0/TvdbpluginUpcomingEpisodes.zip",
+                "checksum": "af871ccd0890898acc817e460cbc1c85",
+                "timestamp": "2022-01-05T22:12:31+00:00"
+            }
+        ]
+    }
+]
