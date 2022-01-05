@@ -184,8 +184,8 @@ namespace Jellyfin.Plugin.Tvdb.Providers
                 .ToList();
 
             // Add missing seasons
-            var newSeasons = AddMissingSeasons(series, existingSeasons, allSeasons);
-            AddMissingEpisodes(existingEpisodes, allEpisodes, existingSeasons.Concat(newSeasons).ToList());
+            // var newSeasons = AddMissingSeasons(series, existingSeasons, allSeasons);
+            AddMissingEpisodes(existingEpisodes, allEpisodes, existingSeasons.ToList());
         }
 
         private async Task HandleSeason(Season season)
@@ -279,8 +279,9 @@ namespace Jellyfin.Plugin.Tvdb.Providers
             // Similarly, create a new virtual episode if the real one was deleted.
             if (itemChangeEventArgs.Item is Season season)
             {
-                var newSeason = AddVirtualSeason(season.IndexNumber!.Value, season.Series);
-                HandleSeason(newSeason).GetAwaiter().GetResult();
+                return;
+                // var newSeason = AddVirtualSeason(season.IndexNumber!.Value, season.Series);
+                // HandleSeason(newSeason).GetAwaiter().GetResult();
             }
             else if (itemChangeEventArgs.Item is Episode episode)
             {
@@ -423,6 +424,8 @@ namespace Jellyfin.Plugin.Tvdb.Providers
                 return;
             }
 
+            bool shouldAdd = false;
+
             // Put as much metadata into it as possible
             var newEpisode = new Episode
             {
@@ -449,18 +452,27 @@ namespace Jellyfin.Plugin.Tvdb.Providers
             if (DateTime.TryParse(episode!.FirstAired, out var premiereDate))
             {
                 newEpisode.PremiereDate = premiereDate;
+                DateTime minimumAddDate = DateTime.Now;
+                minimumAddDate.AddDays(Convert.ToDouble(-TvdbPlugin.Instance!.Configuration.DaysSince));
+                if (premiereDate > minimumAddDate)
+                {
+                    shouldAdd = true;
+                }
             }
 
             newEpisode.PresentationUniqueKey = newEpisode.GetPresentationUniqueKey();
             newEpisode.SetProviderId(MetadataProvider.Tvdb, episode.Id.ToString(CultureInfo.InvariantCulture));
 
-            _logger.LogInformation(
+            if (shouldAdd)
+            {
+                _logger.LogInformation(
                 "Creating virtual episode {0} {1}x{2}",
                 season.Series.Name,
                 episode.AiredSeason,
                 episode.AiredEpisodeNumber);
 
-            season.AddChild(newEpisode);
+                season.AddChild(newEpisode);
+            }
         }
     }
 }

@@ -16,9 +16,17 @@
                     </div>
                     <div class="inputContainer">
                         <label for="txtTvdbApiKey">TheTvdb API Key:</label>
-                        <input type="text" id="txtTvdbApiKey" required="required" is="emby-input"/>
+                        <input type="text" id="txtTvdbApiKey" required="required" is="emby-input" />
                         <div class="fieldDescription">
                             TheTVDB Api Key
+                        </div>
+                        
+                        <br />
+
+                        <label for="nmbDaysSince">Time since for episode to be added (days):</label>
+                        <input type="number" id="nmbDaysSince" required="required" is="emby-input" />
+                        <div class="fieldDescription">
+                            The number of days since an episode is released for it to be added, more days will result in it not being added.
                         </div>
                     </div>
                     <br/>
@@ -40,6 +48,7 @@
 
                 ApiClient.getPluginConfiguration(TvdbPluginConfiguration.uniquePluginId).then(function (config) {
                     document.getElementById('txtTvdbApiKey').value = config.ApiKey || '';
+                    document.getElementById('nmbDaysSince').value = config.DaysSince.toString() || "7";
                     Dashboard.hideLoadingMsg();
                 });
             },
@@ -49,6 +58,7 @@
 
                 ApiClient.getPluginConfiguration(TvdbPluginConfiguration.uniquePluginId).then(function (config) {
                     config.ApiKey = document.getElementById('txtTvdbApiKey').value;
+                    config.DaysSince = parseInt(document.getElementById('nmbDaysSince').value);
 
                     ApiClient.updatePluginConfiguration(TvdbPluginConfiguration.uniquePluginId, config).then(function (result) {
                         Dashboard.processPluginConfigurationUpdateResult(result);
