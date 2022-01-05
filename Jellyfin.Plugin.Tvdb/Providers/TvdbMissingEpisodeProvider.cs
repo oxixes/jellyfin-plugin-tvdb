@@ -375,9 +375,15 @@ namespace Jellyfin.Plugin.Tvdb.Providers
                     continue;
                 }
 
-                var existingSeason = existingSeasons.First(season => season.IndexNumber.HasValue && season.IndexNumber.Value == episodeRecord.AiredSeason);
-
-                AddVirtualEpisode(episodeRecord, existingSeason);
+                try
+                {
+                    var existingSeason = existingSeasons.First(season => season.IndexNumber.HasValue && season.IndexNumber.Value == episodeRecord.AiredSeason);
+                    AddVirtualEpisode(episodeRecord, existingSeason);
+                }
+                catch (InvalidOperationException)
+                {
+                    continue;
+                }
             }
         }
 

@@ -12,8 +12,16 @@
                 "version": "1.0.0.0",
                 "changelog": "Initial build",
                 "targetAbi": "10.8.0.0",
-                "sourceUrl": "https://github.com/oxixes/jellyfin-plugin-tvdb/releases/download/1.0.0.0/TvdbpluginUpcomingEpisodes.zip",
-                "checksum": "af871ccd0890898acc817e460cbc1c85",
+                "sourceUrl": "https://example.com",
+                "checksum": "8402af7ffa2bd2462e7178b05837a7e2",
+                "timestamp": "2022-01-05T22:12:31+00:00"
+            },
+            {
+                "version": "1.0.0.0",
+                "changelog": "Initial build",
+                "targetAbi": "10.7.0.0",
+                "sourceUrl": "https://example.com",
+                "checksum": "fc22fa04124680175cd6fb7e1b957376",
                 "timestamp": "2022-01-05T22:12:31+00:00"
             }
         ]
